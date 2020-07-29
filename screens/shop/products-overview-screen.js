@@ -1,11 +1,13 @@
 import React from 'react';
 import { FlatList, Text } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import ProductItem from '../../components/shop/product-item';
+import { addToCart } from '../../redux/cart/cart.actions';
 
 const ProductsOverviewScreen = (props) => {
   const products = useSelector((state) => state.products.availableProducts);
+  const dispatch = useDispatch();
 
   return (
     <FlatList
@@ -21,7 +23,7 @@ const ProductsOverviewScreen = (props) => {
               productTitle: itemData.item.title,
             })
           }
-          onAddToCart={() => {}}
+          onAddToCart={() => dispatch(addToCart(itemData.item))}
         />
       )}
     />
